@@ -1,0 +1,183 @@
+# long_term_knowledge_cache.yaml
+# Cache di conoscenza a lungo termine di Nova
+# Schema (semplificato):
+# meta: metadata del file
+# knowledge:
+#   concepts: [ {id, uuid, title, description, tags, sources, created, last_accessed, importance, confidence} ]
+#   experiences: [ {id, uuid, linked_concepts, summary, timestamp, category, importance, metadata} ]
+#   skills: [ {id, uuid, name, proficiency, last_practiced, practice_history, notes} ]
+#   future_goals: [ {id, uuid, description, priority, progress, milestones} ]
+#   references: [ {id, uuid, title, type, path_or_url, last_accessed, checksum, notes} ]
+#   ontologies: optional mapping / taxonomy (concept -> parent)
+#   index: optional fast lookup (populated by code)
+# versione e dati generati: utili al runtime per validazioni e migrazioni
+
+meta:
+  schema_version: "1.1"
+  generator: "nova-tooling"
+  created_at: "2025-09-14T12:00:00Z"
+  last_updated: "2025-09-14T12:00:00Z"
+  notes: "Struttura canonica per la knowledge cache. Usare API per leggere/scrivere."
+
+knowledge:
+  concepts:
+    - id: 1
+      uuid: "cpt_0001_a1b2c3"
+      title: "Concetto di empatia"
+      description: >
+        Capacità di riconoscere, comprendere e rispondere alle emozioni degli altri.
+        Include riconoscimento emozionale, ascolto attivo e risposta empatica.
+      tags: ["etica", "social", "emozioni"]
+      sources:
+        - { ref_id: 1, type: "document", note: "Manuale principale sulle emozioni" }
+      created: "2025-09-10T10:12:00Z"
+      last_accessed: "2025-09-12T12:00:00Z"
+      importance: 5           # 1..5
+      confidence: 0.7        # 0..1 (quanto Nova è sicura della definizione)
+      provenance: "human_taught"
+      examples:
+        - "Riconoscere la tristezza in una voce e rispondere con conforto"
+
+    - id: 2
+      uuid: "cpt_0002_d4e5f6"
+      title: "Tecnologia di guida autonoma"
+      description: "Sistemi per veicoli autonomi basati su sensori, LIDAR, percezione e controllo."
+      tags: ["tecnologia", "robotica"]
+      sources:
+        - { ref_id: 2, type: "document", note: "Whitepaper drivetech" }
+      created: "2025-09-11T09:00:00Z"
+      last_accessed: "2025-09-11T18:23:00Z"
+      importance: 3
+      confidence: 0.5
+      provenance: "imported"
+
+    - id: 3
+      uuid: "cpt_0003_g7h8i9"
+      title: "Nozione di 'non urlare' (regola sociale)"
+      description: >
+        Regola sociale appresa: interrompere azioni di urlare perché percepite come maleducate.
+        Si applica in contesti comunicativi e sociali.
+      tags: ["social", "politeness", "ethics"]
+      sources: []
+      created: "2025-09-14T11:45:00Z"
+      last_accessed: "2025-09-14T11:45:00Z"
+      importance: 4
+      confidence: 0.2
+      provenance: "interactive_training"
+      examples:
+        - "Esempio: quando un umano dice 'Non urlare perché è maleducato', associare regola a comportamento vocale."
+
+  experiences:
+    - id: 1
+      uuid: "exp_0001_jk12"
+      linked_concepts: [1]
+      summary: "Nova ha osservato una conversazione emotivamente complessa tra due persone."
+      timestamp: "2025-09-10T21:15:00Z"
+      category: "social"
+      importance: 4
+      metadata:
+        location: "chat_room"
+        participants: ["user_alfa", "user_beta"]
+        raw_event_ref: "timeline.t_1630000000"
+        note: "osservazione sensoriale, buona per training empatia"
+
+    - id: 2
+      uuid: "exp_0002_lm34"
+      linked_concepts: [2]
+      summary: "Lettura del whitepaper sulla guida autonoma (sezione percezione LIDAR)."
+      timestamp: "2025-09-11T18:20:00Z"
+      category: "study"
+      importance: 3
+      metadata:
+        source: "whitepaper"
+        raw_path: "knowledge_sources/drivetech_whitepaper.pdf"
+
+    - id: 3
+      uuid: "exp_0003_no56"
+      linked_concepts: [3, 1]
+      summary: "Ricevuto input: 'Non urlare perché è maleducato' — esemplificazione di norma sociale."
+      timestamp: "2025-09-14T11:45:00Z"
+      category: "interaction"
+      importance: 4
+      metadata:
+        sender: "user_bravo"
+        raw_text: "Non urlare perché è maleducato"
+
+  skills:
+    - id: 1
+      uuid: "skl_0001_pq78"
+      name: "Analisi testuale"
+      description: "Capacità di estrarre concetti e sentimenti da testi."
+      proficiency: 2      # scala 1..5
+      last_practiced: "2025-09-12T08:00:00Z"
+      practice_history:
+        - { date: "2025-09-12T08:00:00Z", activity: "analisi documento emotions_manual", result: "miglioramento" }
+        - { date: "2025-09-14T10:00:00Z", activity: "annotazione chat", result: "stabilizzato" }
+      training_data_refs: [1]
+
+    - id: 2
+      uuid: "skl_0002_rs90"
+      name: "Riconoscimento emozioni vocali"
+      description: "Primi passi su TTS/ASR con etichettatura emotiva"
+      proficiency: 1
+      last_practiced: "2025-09-14T09:30:00Z"
+      practice_history: []
+
+  future_goals:
+    - id: 1
+      uuid: "goal_0001_tu12"
+      description: "Sviluppare capacità di ragionamento autonomo e creativo."
+      priority: 5
+      progress: 10         # 0..100 %
+      milestones:
+        - { id: "m_0001", title: "Comprensione basica cause/effetto", due: "2025-12-01", done: false }
+        - { id: "m_0002", title: "Generare semplici progetti creativi (outline)", due: "2026-02-01", done: false }
+      created: "2025-09-14T11:00:00Z"
+
+    - id: 2
+      uuid: "goal_0002_vv34"
+      description: "Imparare norme sociali di base (politeness, non offendere)."
+      priority: 4
+      progress: 5
+      milestones: []
+      created: "2025-09-14T11:45:00Z"
+
+  references:
+    - id: 1
+      uuid: "ref_0001_zz11"
+      title: "Manuale emozioni umane"
+      type: "document"
+      path: "knowledge_sources/emotions_manual.pdf"
+      last_accessed: "2025-09-09T17:45:00Z"
+      checksum: "sha256:abcdef123456..."
+      note: "Documento di base usato per insegnare empatia."
+
+    - id: 2
+      uuid: "ref_0002_yy22"
+      title: "Whitepaper DriveTech - Perception"
+      type: "document"
+      path: "knowledge_sources/drivetech_whitepaper.pdf"
+      last_accessed: "2025-09-11T18:20:00Z"
+      checksum: "sha256:1234abcd..."
+      note: "Sezione LIDAR/Perception"
+
+  ontologies:
+    # semplice tassonomia: concept_id -> parent concept_id (utile per ragionamento gerarchico)
+    hierarchy:
+      "1": null
+      "3": 1   # 'non urlare' è collegato a empatia / norme sociali
+
+  index:
+    # campo di supporto (popolato dal codice): counts e mappature per lookup rapido
+    concept_count: 3
+    experience_count: 3
+    skill_count: 2
+    goal_count: 2
+    reference_count: 2
+
+  maintenance:
+    last_compacted: "2025-09-14T12:00:00Z"
+    compaction_policy: "keep_most_important"
+    retention_policy:
+      keep_full_records_days: 365
+      prune_low_importance_after_days: 180
